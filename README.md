@@ -49,6 +49,27 @@ Introdução ao Deep Learning com Redes Neurais Artificiais:
 
 ---
 
+### Aula 03 - Large Language Models (LLMs)
+**Arquivo:** `aula_03.ipynb`
+
+Introdução ao uso de LLMs para análise de dados:
+
+- 🤖 Integração com API da OpenAI
+- 🔑 Configuração segura de API Keys
+- 💬 Consultas sobre mercado imobiliário brasileiro
+- 📊 Estimativas de preços com parâmetros específicos
+- 🔄 Comparação: ML tradicional vs LLMs
+- 💡 Vantagens e limitações das LLMs
+
+**Conceitos abordados:**
+- GPT-5
+- Prompt Engineering
+- APIs de IA
+- Uso de variáveis de ambiente
+- Análise qualitativa vs quantitativa
+
+---
+
 ## 📁 Dataset
 
 **Arquivo:** `Housing.csv` / `Housing_BR.csv`
@@ -101,10 +122,28 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-### 4. Executar Jupyter Notebook
-```bash
-jupyter notebook
-```
+3. Iniciar o Jupyter Notebook:
+   ```bash
+   jupyter notebook
+   ```
+
+4. Abrir os notebooks:
+   - `aula_01.ipynb` - Regressão Linear
+   - `aula_02.ipynb` - Redes Neurais
+   - `aula_03.ipynb` - LLMs (requer API Key da OpenAI)
+
+### 📝 Configuração para Aula 03:
+
+Para usar a Aula 03 (LLMs), você precisa de uma API Key da OpenAI:
+
+1. Acesse: https://platform.openai.com/
+2. Crie uma conta e gere uma API Key
+3. Crie um arquivo `.env` na pasta do projeto:
+   ```
+   OPENAI_API_KEY=sua-chave-aqui
+   ```
+
+---
 
 ### 5. Abrir os notebooks
 - `aula_01.ipynb` - Comece por aqui!
@@ -122,11 +161,13 @@ seaborn
 scikit-learn
 tensorflow
 jupyter
+openai
+python-dotenv
 ```
 
 Instale tudo de uma vez:
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn tensorflow jupyter
+pip install pandas numpy matplotlib seaborn scikit-learn tensorflow jupyter openai python-dotenv
 ```
 
 ---
@@ -147,18 +188,27 @@ pip install pandas numpy matplotlib seaborn scikit-learn tensorflow jupyter
 - ✅ Entender a importância da normalização
 - ✅ Comparar modelos tradicionais vs redes neurais
 
+### Após completar a Aula 03:
+- ✅ Integrar com APIs de IA (OpenAI)
+- ✅ Usar LLMs para análise de dados
+- ✅ Fazer perguntas estruturadas a modelos de linguagem
+- ✅ Comparar abordagens: ML tradicional vs LLMs
+- ✅ Entender vantagens e limitações das LLMs
+
 ---
 
 ## 📊 Comparação de Modelos
 
-| Característica | Regressão Linear | Rede Neural |
-|----------------|------------------|-------------|
-| **Complexidade** | Baixa | Alta |
-| **Interpretabilidade** | Alta | Baixa |
-| **Relações não-lineares** | Não captura | Captura bem |
-| **Quantidade de dados** | Funciona com poucos | Precisa de mais |
-| **Tempo de treino** | Rápido | Mais lento |
-| **Overfitting** | Raro | Comum (requer cuidado) |
+| Característica | Regressão Linear | Rede Neural | LLM (OpenAI) |
+|----------------|------------------|-------------|--------------|
+| **Complexidade** | Baixa | Alta | Muito Alta |
+| **Interpretabilidade** | Alta | Baixa | Média |
+| **Relações não-lineares** | Não captura | Captura bem | Captura muito bem |
+| **Quantidade de dados** | Funciona com poucos | Precisa de mais | Não precisa treinar |
+| **Tempo de treino** | Rápido | Mais lento | Instantâneo (API) |
+| **Overfitting** | Raro | Comum (requer cuidado) | N/A |
+| **Custo** | Gratuito | Gratuito | Pago por requisição |
+| **Explicabilidade** | Coeficientes claros | Caixa-preta | Pode explicar |
 
 ---
 
@@ -202,6 +252,11 @@ mobilia = 2  # Mobiliada
 - MAE: ~180-280 mil reais
 - Melhor captura de padrões complexos
 
+### LLM OpenAI (Aula 03):
+- Estimativas baseadas em conhecimento geral do mercado
+- Explicações qualitativas dos fatores de preço
+- Útil para análises exploratórias e validação
+
 ---
 
 ## 📝 Licença
@@ -218,11 +273,14 @@ Este projeto é destinado para fins educacionais.
 - [TensorFlow/Keras](https://www.tensorflow.org/api_docs)
 - [Matplotlib](https://matplotlib.org/stable/contents.html)
 - [Seaborn](https://seaborn.pydata.org/)
+- [OpenAI API](https://platform.openai.com/docs)
 
 ### Tutoriais recomendados:
 - [Kaggle Learn](https://www.kaggle.com/learn)
 - [TensorFlow Tutorials](https://www.tensorflow.org/tutorials)
 - [Scikit-learn Tutorials](https://scikit-learn.org/stable/tutorial/index.html)
+- [OpenAI Cookbook](https://cookbook.openai.com/)
+- [Prompt Engineering Guide](https://www.promptingguide.ai/)
 
 ---
 
