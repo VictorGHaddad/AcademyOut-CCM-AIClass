@@ -84,8 +84,8 @@ Dataset com informações de 545 imóveis contendo:
 
 ### 1. Clonar o repositório
 ```bash
-git clone <url-do-repositorio>
-cd ccm-internal-aula
+git clone https://github.com/VictorGHaddad/AcademyOut-CCM-AIClass.git
+cd AcademyOut-CCM-AIClass
 ```
 
 ### 2. Criar ambiente virtual
