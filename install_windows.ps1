@@ -9,13 +9,15 @@ Write-Host "============================================================" -Foreg
 Write-Host ""
 
 # Verificar se Python esta instalado
-try {
+$pythonInstalled = Get-Command python -ErrorAction SilentlyContinue
+
+if ($pythonInstalled) {
     $pythonVersion = python --version 2>&1
     Write-Host "[OK] Python encontrado!" -ForegroundColor Green
     Write-Host $pythonVersion
     Write-Host ""
 }
-catch {
+else {
     Write-Host "[AVISO] Python nao encontrado. Iniciando instalacao..." -ForegroundColor Yellow
     Write-Host ""
     

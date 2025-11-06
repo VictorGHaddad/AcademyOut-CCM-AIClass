@@ -41,50 +41,24 @@ Guia rápido para configurar Python 3.12 e ambiente virtual no Windows.
 
 ---
 
-## 📦 Instalando as Dependências
-
-Após executar o script de instalação:
-
-1. **Ativar o ambiente virtual:**
-   ```cmd
-   venv\Scripts\activate
-   ```
-
-2. **Instalar as dependências:**
-   ```cmd
-   pip install -r requirements.txt
-   ```
-
-3. **Iniciar o Jupyter Notebook:**
-   ```cmd
-   jupyter notebook
-   ```
-
 ---
 
-## 🔧 Instalação Manual
+## 📦 Instalação Manual
 
-Se preferir instalar manualmente:
+Se preferir instalar manualmente, siga os passos abaixo:
 
-### 1. Instalar Python 3.7
-- Acesse: https://www.python.org/downloads/release/python-370/
-- Baixe Python 3.7.0
-- ⚠️ **Marque:** "Add Python to PATH" durante a instalação
+### 1. Instalar Python 3.12
 
-### 2. Criar ambiente virtual
-```cmd
-python -m venv venv
-```
+1. **Baixe Python 3.12**:
+   - Acesse: [https://www.python.org/downloads/release/python-3120/](https://www.python.org/downloads/release/python-3120/)
+   - Baixe o instalador apropriado:
+     - Para Windows 64-bit: **Windows x86-64 executable installer**
+     - Para Windows 32-bit: **Windows x86 executable installer**
 
-### 3. Ativar ambiente virtual
-```cmd
-venv\Scripts\activate
-```
-
-### 4. Instalar dependências
-```cmd
-pip install -r requirements.txt
-```
+2. **Instale o Python**:
+   - Execute o instalador baixado
+   - ✅ **IMPORTANTE:** Marque **"Add Python 3.12 to PATH"**
+   - Clique em **"Install Now"**
 
 ---
 
