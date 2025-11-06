@@ -41,8 +41,8 @@ if ($fase -eq "install") {
 
     Write-Section "Instalacao do Python 3.12"
 
-    $url = "https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe"
-    $output = "C:\temp\python-3.12.0.exe"
+    $url = "https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe"
+    $output = "C:\temp\python-3.12.0-amd64.exe"
 
     # Cria pasta temp se necessário
     if (-not (Test-Path "C:\temp")) {
