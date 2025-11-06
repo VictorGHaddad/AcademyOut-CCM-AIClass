@@ -29,11 +29,23 @@ try {
     
     Write-Host "[OK] Python instalado!" -ForegroundColor Green
     Write-Host ""
-    Write-Host "IMPORTANTE: Por favor, FECHE e REABRA o PowerShell." -ForegroundColor Yellow
-    Write-Host "Depois execute este script novamente para criar o ambiente virtual." -ForegroundColor Yellow
     
-    Read-Host "Pressione Enter para sair"
-    exit 0
+    # Atualiza o PATH na sessão atual
+    $pythonPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+    $env:Path = $pythonPath + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+    
+    # Verifica se o python foi adicionado
+    Write-Host "Verificando instalacao do Python..." -ForegroundColor Cyan
+    python --version
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[ERRO] Python nao encontrado mesmo apos a instalacao." -ForegroundColor Red
+        Write-Host "Feche e reabra o PowerShell antes de rodar novamente este script." -ForegroundColor Yellow
+        Read-Host "Pressione Enter para sair"
+        exit 1
+    }
+    
+    Write-Host "[OK] Python encontrado no PATH!" -ForegroundColor Green
+    Write-Host ""
 }
 catch {
     Write-Host "[ERRO] Falha no download!" -ForegroundColor Red
