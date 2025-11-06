@@ -9,44 +9,33 @@ echo  Instalacao do Python 3.12 e Ambiente Virtual
 echo ============================================================
 echo.
 
-REM Verificar se Python esta instalado
-python --version >nul 2>&1
-if %errorlevel% neq 0 (
-    echo [AVISO] Python nao encontrado. Iniciando instalacao...
-    echo.
-    
-    REM Criar pasta temp se nao existir
-    if not exist "c:\temp" mkdir "c:\temp"
-    
-    REM Baixar Python 3.12
-    echo Baixando Python 3.12...
-    powershell -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe' -OutFile 'c:\temp\python-3.12.0.exe'"
-    
-    if not exist "c:\temp\python-3.12.0.exe" (
-        echo [ERRO] Falha no download!
-        pause
-        exit /b 1
-    )
-    
-    echo [OK] Download concluido!
-    echo.
-    echo Instalando Python 3.12...
-    
-    REM Instalar Python
-    c:\temp\python-3.12.0.exe /quiet InstallAllUsers=0 InstallLauncherAllUsers=0 PrependPath=1 Include_test=0
-    
-    echo.
-    echo [OK] Python instalado!
-    echo.
-    echo IMPORTANTE: Por favor, FECHE e REABRA este terminal.
-    echo Depois execute este script novamente para criar o ambiente virtual.
+REM Criar pasta temp se nao existir
+if not exist "c:\temp" mkdir "c:\temp"
+
+REM Baixar Python 3.12
+echo Baixando Python 3.12...
+powershell -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe' -OutFile 'c:\temp\python-3.12.0.exe'"
+
+if not exist "c:\temp\python-3.12.0.exe" (
+    echo [ERRO] Falha no download!
     pause
-    exit /b 0
+    exit /b 1
 )
 
-echo [OK] Python encontrado!
-python --version
+echo [OK] Download concluido!
 echo.
+echo Instalando Python 3.12...
+
+REM Instalar Python
+c:\temp\python-3.12.0.exe /quiet InstallAllUsers=0 InstallLauncherAllUsers=0 PrependPath=1 Include_test=0
+
+echo.
+echo [OK] Python instalado!
+echo.
+echo IMPORTANTE: Por favor, FECHE e REABRA este terminal.
+echo Depois execute este script novamente para criar o ambiente virtual.
+pause
+exit /b 0
 
 REM Criar ambiente virtual
 echo ============================================================

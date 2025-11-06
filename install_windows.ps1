@@ -7,54 +7,39 @@ Write-Host "============================================================" -Foreg
 Write-Host " Instalacao do Python 3.12 e Ambiente Virtual" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host ""
+Write-Host "Baixando Python 3.12..." -ForegroundColor Cyan
 
-# Verificar se Python esta instalado
-$pythonInstalled = Get-Command python -ErrorAction SilentlyContinue
-
-if ($pythonInstalled) {
-    $pythonVersion = python --version 2>&1
-    Write-Host "[OK] Python encontrado!" -ForegroundColor Green
-    Write-Host $pythonVersion
-    Write-Host ""
+# Criar pasta temp se nao existir
+if (-not (Test-Path "c:\temp")) {
+    New-Item -Path "c:\temp" -ItemType Directory -Force | Out-Null
 }
-else {
-    Write-Host "[AVISO] Python nao encontrado. Iniciando instalacao..." -ForegroundColor Yellow
+
+$url = "https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe"
+$output = "c:\temp\python-3.12.0.exe"
+
+try {
+    Invoke-WebRequest -Uri $url -OutFile $output
+    Write-Host "[OK] Download concluido!" -ForegroundColor Green
     Write-Host ""
     
-    # Criar pasta temp se nao existir
-    if (-not (Test-Path "c:\temp")) {
-        New-Item -Path "c:\temp" -ItemType Directory -Force | Out-Null
-    }
+    Write-Host "Instalando Python 3.12..." -ForegroundColor Cyan
     
-    # Baixar Python 3.12
-    Write-Host "Baixando Python 3.12..." -ForegroundColor Cyan
-    $url = "https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe"
-    $output = "c:\temp\python-3.12.0.exe"
+    # Instalar Python silenciosamente
+    Start-Process -FilePath $output -ArgumentList "/quiet", "InstallAllUsers=0", "InstallLauncherAllUsers=0", "PrependPath=1", "Include_test=0" -Wait
     
-    try {
-        Invoke-WebRequest -Uri $url -OutFile $output
-        Write-Host "[OK] Download concluido!" -ForegroundColor Green
-        Write-Host ""
-        
-        Write-Host "Instalando Python 3.12..." -ForegroundColor Cyan
-        
-        # Instalar Python silenciosamente
-        Start-Process -FilePath $output -ArgumentList "/quiet", "InstallAllUsers=0", "InstallLauncherAllUsers=0", "PrependPath=1", "Include_test=0" -Wait
-        
-        Write-Host "[OK] Python instalado!" -ForegroundColor Green
-        Write-Host ""
-        Write-Host "IMPORTANTE: Por favor, FECHE e REABRA o PowerShell." -ForegroundColor Yellow
-        Write-Host "Depois execute este script novamente para criar o ambiente virtual." -ForegroundColor Yellow
-        
-        Read-Host "Pressione Enter para sair"
-        exit 0
-    }
-    catch {
-        Write-Host "[ERRO] Falha no download!" -ForegroundColor Red
-        Write-Host "Erro: $_" -ForegroundColor Red
-        Read-Host "Pressione Enter para sair"
-        exit 1
-    }
+    Write-Host "[OK] Python instalado!" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "IMPORTANTE: Por favor, FECHE e REABRA o PowerShell." -ForegroundColor Yellow
+    Write-Host "Depois execute este script novamente para criar o ambiente virtual." -ForegroundColor Yellow
+    
+    Read-Host "Pressione Enter para sair"
+    exit 0
+}
+catch {
+    Write-Host "[ERRO] Falha no download!" -ForegroundColor Red
+    Write-Host "Erro: $_" -ForegroundColor Red
+    Read-Host "Pressione Enter para sair"
+    exit 1
 }
 
 # Criar ambiente virtual
