@@ -16,26 +16,18 @@ try {
     Write-Host ""
 }
 catch {
-    Write-Host "[AVISO] Python nao encontrado. Iniciando download..." -ForegroundColor Yellow
+    Write-Host "[AVISO] Python nao encontrado. Iniciando instalacao..." -ForegroundColor Yellow
     Write-Host ""
     
-    # Detectar arquitetura do Windows
-    $arch = (Get-WmiObject Win32_OperatingSystem).OSArchitecture
-    Write-Host "[INFO] Arquitetura detectada: $arch" -ForegroundColor Cyan
+    # Criar pasta temp se nao existir
+    if (-not (Test-Path "c:\temp")) {
+        New-Item -Path "c:\temp" -ItemType Directory -Force | Out-Null
+    }
     
     # Baixar Python 3.12
     Write-Host "Baixando Python 3.12..." -ForegroundColor Cyan
-    
-    # Usar amd64 para sistemas 64-bit (funciona tanto em Intel quanto AMD)
-    if ($arch -like "*64*") {
-        $url = "https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe"
-        Write-Host "[INFO] Baixando versao 64-bit..." -ForegroundColor Cyan
-    } else {
-        $url = "https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe"
-        Write-Host "[INFO] Baixando versao 32-bit..." -ForegroundColor Cyan
-    }
-    
-    $output = "python-installer.exe"
+    $url = "https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe"
+    $output = "c:\temp\python-3.12.0.exe"
     
     try {
         Invoke-WebRequest -Uri $url -OutFile $output
@@ -43,23 +35,21 @@ catch {
         Write-Host ""
         
         Write-Host "Instalando Python 3.12..." -ForegroundColor Cyan
-        Write-Host "IMPORTANTE: Marque a opcao 'Add Python to PATH'!" -ForegroundColor Yellow
-        Write-Host ""
         
         # Instalar Python silenciosamente
-        Start-Process -FilePath $output -ArgumentList "/quiet", "InstallAllUsers=1", "PrependPath=1" -Wait
+        Start-Process -FilePath $output -ArgumentList "/quiet", "InstallAllUsers=0", "InstallLauncherAllUsers=0", "PrependPath=1", "Include_test=0" -Wait
         
         Write-Host "[OK] Python instalado!" -ForegroundColor Green
         Write-Host ""
-        Write-Host "Por favor, FECHE e REABRA o PowerShell, depois execute este script novamente." -ForegroundColor Yellow
+        Write-Host "IMPORTANTE: Por favor, FECHE e REABRA o PowerShell." -ForegroundColor Yellow
+        Write-Host "Depois execute este script novamente para criar o ambiente virtual." -ForegroundColor Yellow
         
-        Remove-Item $output -ErrorAction SilentlyContinue
         Read-Host "Pressione Enter para sair"
         exit 0
     }
     catch {
         Write-Host "[ERRO] Falha no download!" -ForegroundColor Red
-        Write-Host "Por favor, baixe manualmente: https://www.python.org/downloads/" -ForegroundColor Yellow
+        Write-Host "Erro: $_" -ForegroundColor Red
         Read-Host "Pressione Enter para sair"
         exit 1
     }
