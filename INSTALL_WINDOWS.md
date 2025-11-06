@@ -31,9 +31,12 @@ Guia rápido para configurar Python 3.12 e ambiente virtual no Windows.
    ```
 
 **O script irá:**
+- ✅ Detectar automaticamente a arquitetura do Windows (Intel/AMD - 32/64 bits)
 - ✅ Baixar e instalar Python 3.12 (se necessário)
 - ✅ Criar ambiente virtual (venv)
 - ✅ Instruir sobre os próximos passos
+
+> 💡 **Compatibilidade:** O script funciona em processadores Intel e AMD, detectando automaticamente a arquitetura correta.
 
 ---
 

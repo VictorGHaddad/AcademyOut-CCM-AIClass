@@ -15,9 +15,28 @@ if %errorlevel% neq 0 (
     echo [AVISO] Python nao encontrado. Iniciando download...
     echo.
     
+    REM Detectar arquitetura do Windows
+    echo [INFO] Detectando arquitetura do sistema...
+    set "PYTHON_URL=https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe"
+    
+    REM Verificar se é 64-bit (funciona tanto em Intel quanto AMD)
+    if defined PROCESSOR_ARCHITEW6432 (
+        echo [INFO] Sistema 64-bit detectado
+        set "PYTHON_URL=https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe"
+    ) else if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+        echo [INFO] Sistema 64-bit detectado
+        set "PYTHON_URL=https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe"
+    ) else if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+        echo [INFO] Sistema 32-bit detectado
+        set "PYTHON_URL=https://www.python.org/ftp/python/3.12.0/python-3.12.0.exe"
+    ) else (
+        echo [INFO] Usando versao 64-bit por padrao
+    )
+    echo.
+    
     REM Baixar Python 3.12
     echo Baixando Python 3.12...
-    powershell -Command "& {Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe' -OutFile 'python-installer.exe'}"
+    powershell -Command "& {Invoke-WebRequest -Uri '%PYTHON_URL%' -OutFile 'python-installer.exe'}"
     
     if not exist python-installer.exe (
         echo [ERRO] Falha no download!
